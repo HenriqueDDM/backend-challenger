@@ -19,9 +19,9 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { PaginationResponseProps } from 'src/shared/domain/types';
-import { ApiPaginatedResponse } from 'src/shared/presentation/decorators/paginated.decorator';
-import { PaginationPropsDto } from 'src/shared/presentation/dtos/pagination-props.dto';
+import { PaginationResponseProps } from '../../../shared/domain/types';
+import { ApiPaginatedResponse } from '../../../shared/presentation/decorators/paginated.decorator';
+import { PaginationPropsDto } from '../../../shared/presentation/dtos/pagination-props.dto';
 import { DeleteUser } from 'src/users/application/use-cases/delete-user';
 import { GetUserList } from 'src/users/application/use-cases/get-user-list';
 import { UpdateUser } from 'src/users/application/use-cases/update-user';

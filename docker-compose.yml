@@ -1,8 +1,8 @@
-version: '3.8'
-
 services:
   db:
-    image: postgis/postgis:15-3.3-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: postgres_db
     environment:
       POSTGRES_USER: postgres
@@ -14,7 +14,9 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   testdb:
-    image: postgis/postgis:15-3.3-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: postgres_testdb
     environment:
       POSTGRES_USER: postgres
