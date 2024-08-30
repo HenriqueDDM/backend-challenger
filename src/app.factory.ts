@@ -1,10 +1,8 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
+import { HttpExceptionFilter } from './shared/infra/filters/http-exception.filter';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+export const makeApp = (app: INestApplication) => {
   const config = new DocumentBuilder()
     .setTitle('API')
     .setDescription('NestJS API')
@@ -23,6 +21,5 @@ async function bootstrap() {
     }),
   );
   app.enableCors({ origin: '*' });
-  await app.listen(3000);
-}
-bootstrap();
+  app.useGlobalFilters(new HttpExceptionFilter());
+};

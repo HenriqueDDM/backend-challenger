@@ -1,34 +1,32 @@
-version: '3.5'
+version: '3.8'
 
 services:
   db:
-    container_name: db
-    image: postgis/postgis
+    image: postgis/postgis:15-3.3-alpine
+    container_name: postgres_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PGDATA: /data/postgres
-    volumes:
-      - .docker/db/:/data/postgres
     ports:
       - '5432:5432'
-    networks:
-      - postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   testdb:
-    container_name: testdb
-    image: postgis/postgis
+    image: postgis/postgis:15-3.3-alpine
+    container_name: postgres_testdb
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PGDATA: /data/postgres
-    volumes:
-      - .docker/testdb/:/data/postgres
     ports:
       - '5433:5432'
-    networks:
-      - postgres
+    volumes:
+      - testdb_data:/var/lib/postgresql/data
 
-networks:
-  postgres:
-    driver: bridge
+volumes:
+  pgdata:
+    driver: local
+  testdb_data:
+    driver: local
